@@ -10,8 +10,8 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "ナカムラシステム開発 | 5万円から対応可能な小さなシステム開発",
-  description: "中小企業・個人事業主向けのシステム開発サービス。Webページ制作、Excel自動化、業務効率化スクリプトなど、5万円～10万円の小さな仕事から対応可能です。",
+  title: "ナカムラ",
+  description: "中小企業・個人事業主向けのサービス。Webページ制作、Excel自動化、業務効率化スクリプトなど、幅広く対応しております。",
 };
 
 export default function RootLayout({

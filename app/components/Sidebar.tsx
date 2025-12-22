@@ -47,7 +47,7 @@ export default function Sidebar() {
           <div className="flex items-center justify-between mb-8">
             <Link href="/" onClick={() => setSidebarOpen(false)}>
               <h1 className="text-2xl font-bold text-white hover:text-blue-300 transition-colors">
-                ナカムラシステム開発
+                ナカムラサトシ
               </h1>
             </Link>
             <button
@@ -76,35 +76,14 @@ export default function Sidebar() {
               onClick={() => setSidebarOpen(false)}
               className="block px-4 py-3 rounded-lg hover:bg-slate-700 transition-colors font-medium"
             >
-              ホーム
+              自己紹介
             </Link>
             <Link
-              href="/product"
+              href="/saas-vs-custom"
               onClick={() => setSidebarOpen(false)}
               className="block px-4 py-3 rounded-lg hover:bg-slate-700 transition-colors font-medium"
             >
-              製品紹介
-            </Link>
-            <Link
-              href="/chiropractic"
-              onClick={() => setSidebarOpen(false)}
-              className="block px-4 py-3 rounded-lg hover:bg-slate-700 transition-colors font-medium"
-            >
-              整骨院・整体師の方へ
-            </Link>
-            <Link
-              href="/#services"
-              onClick={() => setSidebarOpen(false)}
-              className="block px-4 py-3 rounded-lg hover:bg-slate-700 transition-colors font-medium"
-            >
-              提供サービス
-            </Link>
-            <Link
-              href="/#contact"
-              onClick={() => setSidebarOpen(false)}
-              className="block px-4 py-3 rounded-lg hover:bg-slate-700 transition-colors font-medium"
-            >
-              お問い合わせ
+              協働のご提案
             </Link>
           </nav>
         </div>
@@ -112,4 +91,3 @@ export default function Sidebar() {
     </>
   );
 }
-
