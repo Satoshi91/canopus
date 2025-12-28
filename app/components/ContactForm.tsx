@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 
 interface FormData {
   name: string;
@@ -21,17 +21,14 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
-        <label
-          htmlFor="name"
-          className="block text-gray-700 font-medium mb-2"
-        >
+        <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
           名前（必須入力）
         </label>
         <input
           type="text"
           id="name"
-          {...register('name', {
-            required: '名前は必須です',
+          {...register("name", {
+            required: "名前は必須です",
           })}
           className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
           placeholder="山田 太郎"
@@ -49,4 +46,3 @@ export default function ContactForm() {
     </form>
   );
 }
-

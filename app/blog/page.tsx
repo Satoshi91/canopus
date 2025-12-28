@@ -15,9 +15,7 @@ export default function BlogPage() {
             ← ホームに戻る
           </Link>
           <h1 className="text-4xl font-bold text-gray-800 mb-2">ブログ</h1>
-          <p className="text-gray-600">
-            技術的な学びや知見を共有しています
-          </p>
+          <p className="text-gray-600">技術的な学びや知見を共有しています</p>
         </div>
 
         {posts.length === 0 ? (
@@ -51,4 +49,3 @@ export default function BlogPage() {
     </div>
   );
 }
-

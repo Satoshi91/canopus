@@ -21,6 +21,8 @@ import {
 } from "lucide-react";
 
 export default function Home() {
+  const isContactFormEnabled =
+    process.env.NEXT_PUBLIC_ENABLE_CONTACT_FORM === "true";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(
     new Set()
@@ -177,12 +179,20 @@ export default function Home() {
                 プロフィール
               </Link>
               <Link
-                href="#contact"
-                onClick={handleNavClick}
-                className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-600 transition-colors"
+                href="/blog"
+                className="text-gray-700 hover:text-blue-500 transition-colors"
               >
-                お問い合わせ
+                ブログ
               </Link>
+              {isContactFormEnabled && (
+                <Link
+                  href="#contact"
+                  onClick={handleNavClick}
+                  className="bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-600 transition-colors"
+                >
+                  お問い合わせ
+                </Link>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -227,12 +237,21 @@ export default function Home() {
                 プロフィール
               </Link>
               <Link
-                href="#contact"
-                onClick={handleNavClick}
-                className="block bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-600 transition-colors text-center"
+                href="/blog"
+                className="block text-gray-700 hover:text-blue-500 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
               >
-                お問い合わせ
+                ブログ
               </Link>
+              {isContactFormEnabled && (
+                <Link
+                  href="#contact"
+                  onClick={handleNavClick}
+                  className="block bg-blue-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-600 transition-colors text-center"
+                >
+                  お問い合わせ
+                </Link>
+              )}
             </div>
           )}
         </nav>
@@ -262,13 +281,15 @@ export default function Home() {
               <p className="text-base sm:text-lg text-gray-600 mb-10 leading-relaxed">
                 相談から開発まで、顔の見えるパートナーとして。Excelの自動化から最新AIの導入まで、現場に一番近い解決策をご提案します。
               </p>
-              <Link
-                href="#contact"
-                onClick={handleNavClick}
-                className="inline-block bg-blue-500 text-white px-10 py-4 rounded-full hover:bg-blue-600 transition-all transform hover:scale-105 text-lg font-medium shadow-lg hover:shadow-xl"
-              >
-                まずはお悩みを聞かせてください（無料相談）
-              </Link>
+              {isContactFormEnabled && (
+                <Link
+                  href="#contact"
+                  onClick={handleNavClick}
+                  className="inline-block bg-blue-500 text-white px-10 py-4 rounded-full hover:bg-blue-600 transition-all transform hover:scale-105 text-lg font-medium shadow-lg hover:shadow-xl"
+                >
+                  まずはお悩みを聞かせてください（無料相談）
+                </Link>
+              )}
             </div>
             <div className="relative h-96 lg:h-[600px] flex items-center justify-center">
               <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-xl">
@@ -775,137 +796,139 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto">
-          <div
-            className={`text-center mb-12 transition-opacity duration-1000 ${
-              visibleSections.has("contact") ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">
-              お問い合わせ
-            </h2>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              ご相談やお見積もりは、お気軽にお問い合わせください。
-            </p>
-          </div>
-
-          <form
-            onSubmit={handleSubmit}
-            className={`bg-white p-8 rounded-2xl shadow-lg space-y-6 transition-opacity duration-1000 ${
-              visibleSections.has("contact") ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            {/* 成功メッセージ */}
-            {isSuccess && (
-              <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-2xl">
-                <p className="font-medium">
-                  お問い合わせありがとうございます。送信が完了しました。
-                </p>
-              </div>
-            )}
-
-            {/* エラーメッセージ */}
-            {error && (
-              <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-2xl">
-                <p className="font-medium">{error}</p>
-              </div>
-            )}
-
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                お名前
-                <span className="text-red-500 text-sm">*</span>
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                placeholder="山田 太郎"
-                disabled={isLoading}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                メールアドレス
-                <span className="text-red-500 text-sm">*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                placeholder="example@email.com"
-                disabled={isLoading}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="category"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                お問い合わせカテゴリー
-              </label>
-              <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-white"
-                disabled={isLoading}
-              >
-                <option value="">選択してください</option>
-                <option value="業務改善のご相談">業務改善のご相談</option>
-                <option value="IT導入のご相談">IT導入のご相談</option>
-                <option value="AI活用のご相談">AI活用のご相談</option>
-                <option value="システム開発のご依頼">
-                  システム開発のご依頼
-                </option>
-                <option value="その他">その他</option>
-              </select>
-            </div>
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                メッセージ
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                rows={6}
-                className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all resize-none"
-                placeholder="お問い合わせ内容をご記入ください"
-                disabled={isLoading}
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-blue-500 text-white px-8 py-4 rounded-2xl hover:bg-blue-600 transition-all transform hover:scale-105 text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+      {isContactFormEnabled && (
+        <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto">
+            <div
+              className={`text-center mb-12 transition-opacity duration-1000 ${
+                visibleSections.has("contact") ? "opacity-100" : "opacity-0"
+              }`}
             >
-              {isLoading ? "送信中..." : "送信する"}
-            </button>
-          </form>
-        </div>
-      </section>
+              <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">
+                お問い合わせ
+              </h2>
+              <p className="text-xl text-gray-600 leading-relaxed">
+                ご相談やお見積もりは、お気軽にお問い合わせください。
+              </p>
+            </div>
+
+            <form
+              onSubmit={handleSubmit}
+              className={`bg-white p-8 rounded-2xl shadow-lg space-y-6 transition-opacity duration-1000 ${
+                visibleSections.has("contact") ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {/* 成功メッセージ */}
+              {isSuccess && (
+                <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-2xl">
+                  <p className="font-medium">
+                    お問い合わせありがとうございます。送信が完了しました。
+                  </p>
+                </div>
+              )}
+
+              {/* エラーメッセージ */}
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-2xl">
+                  <p className="font-medium">{error}</p>
+                </div>
+              )}
+
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-gray-700 font-medium mb-2"
+                >
+                  お名前
+                  <span className="text-red-500 text-sm">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+                  placeholder="山田 太郎"
+                  disabled={isLoading}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-gray-700 font-medium mb-2"
+                >
+                  メールアドレス
+                  <span className="text-red-500 text-sm">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+                  placeholder="example@email.com"
+                  disabled={isLoading}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="category"
+                  className="block text-gray-700 font-medium mb-2"
+                >
+                  お問い合わせカテゴリー
+                </label>
+                <select
+                  id="category"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-white"
+                  disabled={isLoading}
+                >
+                  <option value="">選択してください</option>
+                  <option value="業務改善のご相談">業務改善のご相談</option>
+                  <option value="IT導入のご相談">IT導入のご相談</option>
+                  <option value="AI活用のご相談">AI活用のご相談</option>
+                  <option value="システム開発のご依頼">
+                    システム開発のご依頼
+                  </option>
+                  <option value="その他">その他</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-gray-700 font-medium mb-2"
+                >
+                  メッセージ
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows={6}
+                  className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all resize-none"
+                  placeholder="お問い合わせ内容をご記入ください"
+                  disabled={isLoading}
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-blue-500 text-white px-8 py-4 rounded-2xl hover:bg-blue-600 transition-all transform hover:scale-105 text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              >
+                {isLoading ? "送信中..." : "送信する"}
+              </button>
+            </form>
+          </div>
+        </section>
+      )}
 
       {/* Footer */}
       <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-800 text-gray-300">

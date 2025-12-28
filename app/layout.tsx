@@ -20,11 +20,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isAiChatEnabled = process.env.ENABLE_AI_CHAT === "true";
+
   return (
     <html lang="ja">
       <body className={`${notoSansJP.variable} antialiased bg-gray-50`}>
         {children}
-        <ChatWidget />
+        {isAiChatEnabled && <ChatWidget />}
       </body>
     </html>
   );

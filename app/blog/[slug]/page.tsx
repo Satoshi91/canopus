@@ -44,7 +44,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             })}
           </p>
           {post.frontMatter.description && (
-            <p className="text-lg text-gray-600">{post.frontMatter.description}</p>
+            <p className="text-lg text-gray-600">
+              {post.frontMatter.description}
+            </p>
           )}
         </header>
 
@@ -55,4 +57,3 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </div>
   );
 }
-

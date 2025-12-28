@@ -73,4 +73,3 @@ export function getAllPostSlugs(): string[] {
     .filter((fileName) => fileName.endsWith(".mdx"))
     .map((fileName) => fileName.replace(/\.mdx$/, ""));
 }
-

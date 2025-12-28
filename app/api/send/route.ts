@@ -70,7 +70,11 @@ export async function POST(request: Request) {
     if (error) {
       console.error("Resend error:", error);
       return NextResponse.json(
-        { success: false, error: "メールの送信に失敗しました。しばらくしてから再度お試しください。" },
+        {
+          success: false,
+          error:
+            "メールの送信に失敗しました。しばらくしてから再度お試しください。",
+        },
         { status: 500 }
       );
     }
@@ -84,4 +88,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
