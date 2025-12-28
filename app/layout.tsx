@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
-import Sidebar from "./components/Sidebar";
 import "./globals.css";
+import { ChatWidget } from "@/components/chat-widget";
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -10,8 +10,9 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "ナカムラ",
-  description: "中小企業・個人事業主向けのサービス。Webページ制作、Excel自動化、業務効率化スクリプトなど、幅広く対応しております。",
+  title: "Satoshi Nakamura",
+  description:
+    "ITコンサルタント兼システムエンジニアとして、お客様のビジネスを技術でサポートします。",
 };
 
 export default function RootLayout({
@@ -21,16 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body
-        className={`${notoSansJP.variable} antialiased`}
-      >
-        <div className="flex min-h-screen">
-          <Sidebar />
-          {/* メインコンテンツエリア */}
-          <main className="flex-1 lg:ml-64 w-full">
-            {children}
-          </main>
-        </div>
+      <body className={`${notoSansJP.variable} antialiased bg-gray-50`}>
+        {children}
+        <ChatWidget />
       </body>
     </html>
   );

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #1e293b;
+  --background: #f9fafb;
+  --foreground: #1f2937;
 }
 
 @theme inline {
@@ -11,8 +11,41 @@
   --font-sans: var(--font-noto-sans-jp);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-noto-sans-jp), sans-serif;
+  line-height: 1.75;
+}
+
+@keyframes pulse-delay-300 {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulse-delay-700 {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-delay-300 {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) 0.3s infinite;
+}
+
+.animate-pulse-delay-700 {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) 0.7s infinite;
 }
